@@ -53,7 +53,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'LiteraryHeaven.urls'
+ROOT_URLCONF = 'LiteraryHeaven.LiteraryHeaven.urls'
+
 
 TEMPLATES = [
     {
@@ -70,8 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'LiteraryHeaven.wsgi.application'
-
+WSGI_APPLICATION = 'LiteraryHeaven.LiteraryHeaven.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
