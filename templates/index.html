@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library & Inspirations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c5d6;
+            --border-color: #2d3561;
+            --radius: 8px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .sections {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-card {
+            background: rgba(45, 53, 97, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            background: rgba(45, 53, 97, 0.5);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .section-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .book-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .book-item, .quote-item {
+            background: rgba(15, 15, 30, 0.5);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .book-item:hover, .quote-item:hover {
+            background: rgba(15, 15, 30, 0.8);
+            transform: translateX(4px);
+        }
+
+        .book-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .book-author {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .quote-text {
+            color: var(--text-primary);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-author {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .view-all {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .view-all:hover {
+            transform: translateX(4px);
+        }
+
+        footer {
+            background: rgba(22, 33, 62, 0.8);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .sections {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📚 My Library</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'add-book-read' %}">Add Book Read</a></li>
+                <li><a href="{% url 'add-book-to-read' %}">Add book To Read</a></li>
+                <li><a href="{% url 'quotes-add' %}"> Add Quotes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>My Reading Journey</h1>
+            <p class="tagline">Collecting stories, quotes, and inspiration</p>
+            <div class="cta-buttons">
+                <button class="btn-primary">View My Library</button>
+                <button class="btn-secondary">Get Inspired</button>
+            </div>
+        </section>
+
+        <section class="sections">
+            <!-- Books Section -->
+            <div class="section-card" id="books">
+                <div class="section-icon">📖</div>
+                <h2>Books I've Read</h2>
+                <p>A curated collection of books that have shaped my thinking and enriched my perspective.</p>
+
+                <div class="book-list">
+                    <div class="book-item">
+                        <div class="book-title">The Midnight Library</div>
+                        <div class="book-author">Matt Haig • 2020</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">Educated</div>
+                        <div class="book-author">Tara Westover • 2018</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">Atomic Habits</div>
+                        <div class="book-author">James Clear • 2018</div>
+                    </div>
+                </div>
+
+                <a href="#" class="view-all">View all books →</a>
+            </div>
+
+            <!-- To-Read Section -->
+            <div class="section-card">
+                <div class="section-icon">✨</div>
+                <h2>Books To Read</h2>
+                <p>My ever-growing wishlist of books waiting to be explored and discovered.</p>
+
+                <div class="book-list">
+                    <div class="book-item">
+                        <div class="book-title">Klara and the Sun</div>
+                        <div class="book-author">Kazuo Ishiguro • 2021</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">The Immortality Key</div>
+                        <div class="book-author">Brian Muraresku • 2020</div>
+                    </div>
+                    <div class="book-item">
+                        <div class="book-title">Project Hail Mary</div>
+                        <div class="book-author">Andy Weir • 2021</div>
+                    </div>
+                </div>
+
+                <a href="#" class="view-all">View all →</a>
+            </div>
+
+            <!-- Quotes Section -->
+            <div class="section-card" id="quotes">
+                <div class="section-icon">💡</div>
+                <h2>Inspirational Quotes</h2>
+                <p>Words of wisdom that resonate with me and serve as reminders of what matters most.</p>
+
+                <div class="book-list">
+                    <div class="quote-item">
+                        <div class="quote-text">"If you are living a paltry life. Resolve to stop it today."</div>
+                        <div class="quote-author">— Prajakta Koli</div>
+                    </div>
+                    <div class="quote-item">
+                        <div class="quote-text">"We are not makers of history. We are made by history."</div>
+                        <div class="quote-author">— Martin Luther King Jr.</div>
+                    </div>
+                    <div class="quote-item">
+                        <div class="quote-text">"Everything you want is on the other side of fear."</div>
+                        <div class="quote-author">— Jack Canfield</div>
+                    </div>
+                </div>
+
+                <a href="{% url 'quotes-list' %}" class="view-all">View all quotes →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Personal Library. A collection of stories and inspiration.</p>
+
+    </footer>
+</body>
+</html>

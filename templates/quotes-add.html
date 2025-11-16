@@ -1,0 +1,214 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+ {% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Quote - My Book Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1f3a;
+            --secondary: #232d52;
+            --accent: #00d4ff;
+            --accent-hover: #00b8d4;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--accent), #00a8b5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-cancel:hover {
+            background: var(--primary);
+            color: var(--text-primary);
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .alert {
+          padding: 1rem;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          font-weight: 600;
+          text-align: center;
+        }
+
+        .alert-success {
+          background: var(--success);
+          color: var(--primary);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .alert-error {
+          background: #ef4444;
+          color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+{% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+    <div class="container">
+        <h1>Add Inspirational Quote</h1>
+
+        <form action="/add-quote/" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="quote">Quote</label>
+                <textarea id="quote" name="quote" placeholder="Write or paste the quote here..." required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="author">Quote Author</label>
+                    <input type="text" id="author" name="author" placeholder="e.g., Maya Angelou" required>
+                </div>
+                <div class="form-group">
+                    <label for="book">Book (Optional)</label>
+                    <input type="text" id="book" name="book" placeholder="Which book is it from?">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-submit">Save Quote</button>
+                <button type="button" class="btn-cancel" onclick="window.history.back()">Cancel</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+</body>
+</html>

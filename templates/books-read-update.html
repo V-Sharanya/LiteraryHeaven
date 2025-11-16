@@ -1,0 +1,290 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+ {% block body %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book - My Book Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1f3a;
+            --secondary: #232d52;
+            --accent: #00d4ff;
+            --accent-hover: #00b8d4;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text-primary);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--accent), #00a8b5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-cancel:hover {
+            background: var(--primary);
+            color: var(--text-primary);
+            border-color: var(--accent);
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            color: white;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .btn-delete:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .alert {
+          padding: 1rem;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          font-weight: 600;
+          text-align: center;
+        }
+
+        .alert-success {
+          background: var(--success);
+          color: var(--primary);
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .alert-error {
+          background: #ef4444;
+          color: #fff;
+        }
+
+        .alert-info {
+          background: #3b82f6;
+          color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+
+ {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+    <div class="container">
+        <h1>Update Book</h1>
+
+        <form action="{% url 'books_read_update' book.id %}" method="POST">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" value="{{ book.title }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" value="{{ book.author }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="genre">Genre *</label>
+                    <select id="genre" name="genre" required>
+                        <option value="Fiction" {% if book.genre == "Fiction" %}selected{% endif %}>Fiction</option>
+                        <option value="Non-Fiction" {% if book.genre == 'Non-Fiction' %}selected{% endif %}>Non-Fiction</option>
+                        <option value="Romance" {% if book.genre == 'Romance' %}selected{% endif %}>Romance</option>
+                        <option value="Science" {% if book.genre == 'Science' %}selected{% endif %}>Science</option>
+                        <option value="Thriller" {% if book.genre == 'Thriller' %}selected{% endif %}>Thriller</option>
+                        <option value="Biography" {% if book.genre == 'Biography' %}selected{% endif %}>Biography</option>
+                        <option value="Self-Help" {% if book.genre == 'Self-Help' %}selected{% endif %}>Self-Help</option>
+                        <option value="Fantasy" {% if book.genre == 'Fantasy' %}selected{% endif %}>Fantasy</option>
+                        <option value="Mystery" {% if book.genre == 'Mystery' %}selected{% endif %}>Mystery</option>
+                        <option value="Poetry" {% if book.genre == 'Poetry' %}selected{% endif %}>Poetry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating (1-5) *</label>
+                    <select id="rating" name="rating" required>
+                        <option value="5" {% if book.rating|stringformat:'s' == '5' %}selected{% endif %}>⭐⭐⭐⭐⭐ - Excellent</option>
+                        <option value="4" {% if book.rating|stringformat:'s' == '4' %}selected{% endif %}>⭐⭐⭐⭐ - Very Good</option>
+                        <option value="3" {% if book.rating|stringformat:'s' == '3' %}selected{% endif %}>⭐⭐⭐ - Good</option>
+                        <option value="2" {% if book.rating|stringformat:'s' == '2' %}selected{% endif %}>⭐⭐ - Fair</option>
+                        <option value="1" {% if book.rating|stringformat:'s' == '1' %}selected{% endif %}>⭐ - Poor</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="date_started">Date Read </label>
+                    <input type="date" id="date-read" name="date_started" value="{{ book.date_started|date:'Y-m-d' }}" required>
+                </div>
+                 <div class="form-group">
+                    <label for="date_ended">Date Read </label>
+                    <input type="date" id="date" name="date_ended" value="{{ book.date_ended|date:'Y-m-d' }}"
+ required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cover-url">Cover Image URL</label>
+                <input type="url" id="cover-url" name="cover_image" value="{{ book.cover_image }}">
+            </div>
+
+
+
+
+
+            <div class="button-group">
+                <button type="submit" class="btn-submit">Update Book</button>
+                <button type="button" class="btn-cancel" onclick="window.history.back()">Cancel</button>
+            </div>
+
+
+        </form>
+    </div>
+
+  <script>
+
+  setTimeout(() => {
+    document.querySelectorAll('.alert').forEach(el => el.remove());
+  }, 4000); // 4 seconds
+</script>
+
+
+{%endblock%}
+</body>
+</html>

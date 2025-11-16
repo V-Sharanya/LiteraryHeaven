@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django stuff
+*.log
+local_settings.py
+
+# ENV / Security
+.env
+*.env
+.env.*
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Database files
+db.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Byte-compiled / cache
+*/__pycache__/
+*/*.py[cod]
+
+# Static / Media (optional: if auto-generated)
+staticfiles/
+media/
