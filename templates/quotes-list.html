@@ -240,7 +240,7 @@
     <div class="container">
         <div class="header">
             <h1>Inspirational Quotes</h1>
-            <a href="quotes-add.html" class="btn-add">+ Add Quote</a>
+            <a href="{% url 'quotes-add' %}" class="btn-add">+ Add Quote</a>
         </div>
 
         <div class="quotes-container">
@@ -261,7 +261,7 @@
             <div class="empty-state">
                 <h2>No quotes yet!</h2>
                 <p>Start collecting quotes that inspire you.</p>
-                <a href="quotes-add.html" class="btn-add" style="margin-top: 1rem;">Add Your First Quote</a>
+                <a href="{% url 'quotes-add' %}"" class="btn-add" style="margin-top: 1rem;">Add Your First Quote</a>
             </div>
             {% endfor %}
         </div>

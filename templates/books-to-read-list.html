@@ -250,7 +250,7 @@
             <div class="empty-state" style="grid-column: 1/-1;">
                 <h2>No books yet!</h2>
                 <p>Start building your collection by adding your first book.</p>
-                <a href="add-book-to-read.html" class="btn-add" style="margin-top: 1rem;">Add Your First Book</a>
+                <a href="{% url 'add-book-to-read' %}" class="btn-add" style="margin-top: 1rem;">Add Your First Book</a>
             </div>
             {% endfor %}
         </div>
