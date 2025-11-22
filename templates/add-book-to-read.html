@@ -186,7 +186,8 @@
     <div class="container">
         <h1>Add Book To Read</h1>
 
-        <form action="/add-book-to-read/" method="POST">
+        <!-- Added enctype="multipart/form-data" to support file uploads -->
+        <form action="/add-book-to-read/" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="form-row">
@@ -223,8 +224,9 @@
             </div>
 
             <div class="form-group">
-                <label for="cover_image">Cover Image URL</label>
-                <input type="url" id="cover_image" name="cover_image" placeholder="https://example.com/cover.jpg">
+                <!-- Changed from URL input to file input for image uploads -->
+                <label for="cover_image">Cover Image</label>
+                <input type="file" id="cover_image" name="cover_image" accept="image/*">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>

@@ -27,7 +27,7 @@ class Book_read(models.Model):
     rating = models.CharField(max_length=1,choices=Ratings)
     date_started = models.DateField()
     date_ended = models.DateField()
-    cover_image = models.URLField(max_length=1000)
+    cover_image = models.ImageField(upload_to='book_covers/')
 
 class Book_to_read(models.Model):
     title = models.CharField(max_length=100)
@@ -45,7 +45,7 @@ class Book_to_read(models.Model):
         ('Poetry', 'Poetry')
     )
     genre = models.CharField(max_length=11, choices=GENRES)
-    cover_image = models.URLField(max_length=1000)
+    cover_image = models.ImageField(upload_to='book_covers/')
     description = models.TextField( blank=True,
         null=True,
         help_text="Provide a detailed description of the item."
