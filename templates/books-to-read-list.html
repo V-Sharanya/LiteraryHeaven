@@ -227,7 +227,7 @@
             {% for book in books %}
             <div class="book-card">
                 {% if book.cover_image %}
-                    <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="book-cover">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
                 {% else %}
 
                     <div class="book-cover" style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">📖</div>
@@ -236,7 +236,7 @@
                 <div class="book-title">{{ book.title }}</div>
                 <div class="book-author">by {{ book.author }}</div>
                 <div class="book-genre">{{ book.genre }}</div>
-                <div class="book-title">{{ book.description }}</div>
+                <div class="book-description">{{ book.description }}</div>
 
                 <div class="book-actions">
                     <a href="{%url 'books_to_read_update' book.id %}" class="btn-edit">Edit</a>
